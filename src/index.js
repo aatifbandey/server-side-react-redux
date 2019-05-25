@@ -5,6 +5,7 @@
 //const Home = require("./client/components/Home").default;
 import 'babel-polyfill';
 // execute the module which is run through polyfill make use of async
+//import proxy from "express-http-proxy";
 
 import express from "express";
 import { matchRoutes } from "react-router-config";
@@ -13,6 +14,15 @@ import renderer from "./helpers/renderer";
 import createStore from "./helpers/createStore";
 
 const app = express();
+
+// Set up proxy 
+// Any request trying to access /api is redirected to this below url
+// app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
+// 	proxyReqOptDecorator(opts) {
+// 		opts.header['x-forward-host'] = "localhost:8000"
+// 		return opts;
+// 	}
+// }));
 
 
 app.use(express.static('public'));
@@ -44,5 +54,5 @@ app.get("*", (req, res)=>{
 });
 
 app.listen(8000,()=>{
-	console.log("App listening on 3000")
+	console.log("App listening on 8000")
 });
